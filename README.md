@@ -6,7 +6,7 @@ This is a demo showing that it is possible to run a socket-activated nginx conta
    ```
    $ port=11080
    ```
-2. Build the container image, start socket
+2. Build the container image and start the socket
    ```
    $ bash ./socket-activation-nginx.sh $port
    ```
@@ -20,7 +20,7 @@ This is a demo showing that it is possible to run a socket-activated nginx conta
    ```
 
 > **Note**
-> The _Containerfile_ builds nginx with many features disabled. Hopefully this demo could be modified to instead make use of an official nginx container image.
+> The _Containerfile_ builds nginx with many features disabled. Hopefully this demo could be modified to instead use an official nginx container image.
 
 > **Note**
 > nginx has no official support for systemd socket activation (feature request: https://trac.nginx.org/nginx/ticket/237). This demo makes use of the fact that "_nginx includes an undocumented, internal socket-passing mechanism_" quote from https://freedesktop.org/wiki/Software/systemd/DaemonSocketActivation/
