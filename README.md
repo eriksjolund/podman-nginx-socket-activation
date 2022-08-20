@@ -23,4 +23,4 @@ This is a demo showing that it is possible to run a socket-activated nginx conta
 > The _Containerfile_ builds nginx with many features disabled. Hopefully this demo could be modified to instead make use of an official nginx container image.
 
 > **Note**
-> nginx has no official support for systemd socket activation (feature request: https://trac.nginx.org/nginx/ticket/237). "_nginx includes an undocumented, internal socket-passing mechanism_" quote from https://freedesktop.org/wiki/Software/systemd/DaemonSocketActivation/
+> nginx has no official support for systemd socket activation (feature request: https://trac.nginx.org/nginx/ticket/237). This example makes use of the fact that "_nginx includes an undocumented, internal socket-passing mechanism_" quote from https://freedesktop.org/wiki/Software/systemd/DaemonSocketActivation/
