@@ -18,3 +18,6 @@ This is a demo showing that it is possible to run a socket-activated nginx conta
    <head>
    <title>Welcome to nginx!</title>
    ```
+
+> **Note**
+> The _Containerfile_ builds nginx with many features disabled. Hopefully this demo could be modified to instead make use of an official nginx container image.
