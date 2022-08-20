@@ -1,6 +1,6 @@
 # podman-nginx-socket-activation
 
-This is a demo showing that it is possible to run a socket-activated nginx container with rootless Podman. See also [Podman socket activation tutorial](https://github.com/containers/podman/blob/main/docs/tutorials/socket_activation.md).
+This is a demo showing that it is possible to run a socket-activated nginx container with rootless Podman. See also the [Podman socket activation tutorial](https://github.com/containers/podman/blob/main/docs/tutorials/socket_activation.md).
 
 1. Set the shell variable _port_ to the port number that you would like to use.
    ```
