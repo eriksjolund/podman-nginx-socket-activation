@@ -47,5 +47,5 @@ See the blog post [_How to restrict network access in Podman with systemd_](http
 ## The source IP address is preserved
 
 The rootlesskit port forwarding backend for slirp4netns does not preserve source IP. 
-This is not a problem when using socket-activated sockets. See [Podman GitHub discussion](https://github.com/containers/podman/discussions/10472).
+This is not a problem when using socket-activated sockets. See Podman GitHub [discussion](https://github.com/containers/podman/discussions/10472).
 
