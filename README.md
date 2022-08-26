@@ -30,11 +30,11 @@ This is a demo showing that it is possible to run a socket-activated nginx conta
 ## Native network performance over the socket-activated socket
 Communication over the socket-activated socket does not pass through slirp4netns so it has the same performance characteristics as the normal network on the host.
 
-See the [Podman socket activation tutorial](https://github.com/containers/podman/blob/main/docs/tutorials/socket_activation.md#native-network-performance-over-the-socket-activated-socket)
+See the [Podman socket activation tutorial](https://github.com/containers/podman/blob/main/docs/tutorials/socket_activation.md#native-network-performance-over-the-socket-activated-socket).
 
 ## Possibility to restrict the network in the container
 
-The option `podman run` option `--network=none` enhances security. See the [Podman socket activation tutorial](https://github.com/containers/podman/blob/main/docs/tutorials/socket_activation.md#disabling-the-network-with---networknone)
+The option `podman run` option `--network=none` enhances security. See the [Podman socket activation tutorial](https://github.com/containers/podman/blob/main/docs/tutorials/socket_activation.md#disabling-the-network-with---networknone).
 
 See the blog post [_How to limit container privilege with socket activation_](https://www.redhat.com/sysadmin/socket-activation-podman)
 
