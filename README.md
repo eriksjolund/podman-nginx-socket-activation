@@ -34,13 +34,68 @@ See the [Podman socket activation tutorial](https://github.com/containers/podman
 
 ### Possibility to restrict the network in the container
 
-The option `podman run` option `--network=none` enhances security. See the [Podman socket activation tutorial](https://github.com/containers/podman/blob/main/docs/tutorials/socket_activation.md#disabling-the-network-with---networknone).
+The option `podman run` option `--network=none` enhances security.
+
+```
+--- nginx.service	2022-08-27 10:46:14.586561964 +0200
++++ nginx.service.new	2022-08-27 10:50:35.698301637 +0200
+@@ -15,6 +15,7 @@
+ TimeoutStopSec=70
+ ExecStartPre=/bin/rm -f %t/%n.ctr-id
+ ExecStart=/usr/bin/podman run \
++	--network=none \
+ 	--cidfile=%t/%n.ctr-id \
+ 	--cgroups=no-conmon \
+ 	--rm \
+```
+
+See the [Podman socket activation tutorial](https://github.com/containers/podman/blob/main/docs/tutorials/socket_activation.md#disabling-the-network-with---networknone).
 
 See the blog post [_How to limit container privilege with socket activation_](https://www.redhat.com/sysadmin/socket-activation-podman)
 
 ### Possibility to restrict the network in the container, Podman and OCI runtime
 
 The systemd configuration `RestrictAddressFamilies=AF_UNIX AF_NETLINK` enhances security. 
+To try it out, modify the file _~/.config/systemd/user/nginx.service_ according to
+
+``` diff
+--- nginx.service	2022-08-27 10:46:14.586561964 +0200
++++ nginx.service.new	2022-08-27 10:58:06.625475911 +0200
+@@ -7,14 +7,20 @@
+ Documentation=man:podman-generate-systemd(1)
+ Wants=network-online.target
+ After=network-online.target
++Requires=podman-usernamespace.service
++After=podman-usernamespace.service
+ RequiresMountsFor=%t/containers
+ 
+ [Service]
++RestrictAddressFamilies=AF_UNIX AF_NETLINK
++NoNewPrivileges=yes
+ Environment=PODMAN_SYSTEMD_UNIT=%n
+ Restart=on-failure
+ TimeoutStopSec=70
+ ExecStartPre=/bin/rm -f %t/%n.ctr-id
+ ExecStart=/usr/bin/podman run \
++	--network=none \
++	--pull=never \
+ 	--cidfile=%t/%n.ctr-id \
+ 	--cgroups=no-conmon \
+ 	--rm \
+```
+and add the file _~/.config/systemd/user/podman-usernamespace.service_ with this contents
+
+```
+[Unit]
+Description=podman-usernamespace.service
+
+[Service]
+Type=oneshot
+Restart=on-failure
+TimeoutStopSec=70
+ExecStart=/usr/bin/podman unshare /bin/true
+RemainAfterExit=yes
+```
 
 See the blog post [_How to restrict network access in Podman with systemd_](https://www.redhat.com/sysadmin/podman-systemd-limit-access)
 
