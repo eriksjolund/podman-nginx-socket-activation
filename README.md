@@ -36,7 +36,7 @@ See the [Podman socket activation tutorial](https://github.com/containers/podman
 
 The option `podman run` option `--network=none` enhances security.
 
-```
+``` diff
 --- nginx.service	2022-08-27 10:46:14.586561964 +0200
 +++ nginx.service.new	2022-08-27 10:50:35.698301637 +0200
 @@ -15,6 +15,7 @@
