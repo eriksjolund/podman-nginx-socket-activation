@@ -20,9 +20,6 @@ This is a demo showing that it is possible to run a socket-activated nginx conta
    ```
 
 > **Note**
-> The _Containerfile_ builds nginx with many features disabled. Hopefully this demo could be modified to instead use an official nginx container image (see https://github.com/eriksjolund/podman-nginx-socket-activation/issues/1).
-
-> **Note**
 > nginx has no official support for systemd socket activation (feature request: https://trac.nginx.org/nginx/ticket/237). This demo makes use of the fact that "_nginx includes an undocumented, internal socket-passing mechanism_" quote from https://freedesktop.org/wiki/Software/systemd/DaemonSocketActivation/
 
 ## Advantages of using rootless Podman with socket activation
