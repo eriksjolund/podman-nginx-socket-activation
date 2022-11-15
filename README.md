@@ -100,3 +100,10 @@ See the blog post [_How to restrict network access in Podman with systemd_](http
 
 The rootlesskit port forwarding backend for slirp4netns does not preserve source IP. 
 This is not a problem when using socket-activated sockets. See Podman GitHub [discussion](https://github.com/containers/podman/discussions/10472).
+
+### Podman installation size can be reduced
+
+The Podman network tools are not needed when __--network=host__  or __--network=none__
+is used (see GitHub [issue comment](https://github.com/containers/podman/discussions/16493#discussioncomment-4140832)).
+In other words, the total amount of executables and libraries that are needed by Podman is reduced
+when you run the nginx container with _socket activation_ and __--network=none__.
