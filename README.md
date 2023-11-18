@@ -169,15 +169,10 @@ The feature request was migrated into a GitHub discussion.
    ```
 2. Check the UID of the user _test_
    ```
-   $ id -u
+   $ id -u test
    1000
    ```
-3. Check the GID of the user _test_
-   ```
-   $ id -g
-   1000
-   ````
-4. Create the file _/etc/systemd/system/example3.service_ with the file contents
+3. Create the file _/etc/systemd/system/example3.service_ with the file contents
    ```
    [Unit]
    Wants=network-online.target
