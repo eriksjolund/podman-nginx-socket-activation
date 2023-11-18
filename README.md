@@ -90,7 +90,7 @@ Configure _socket activation_ for TCP port 8080.
 Set up a systemd system service _example2.service_ where rootful podman is running the container image  __docker.io/library/nginx__.
 Configure _socket activation_ for TCP port 80.
 
-The instructions are very similar to Example 1.
+The instructions are similar to Example 1.
 
 1. Create the file _/etc/containers/systemd/example2.container_ with the file contents
    ```
@@ -157,7 +157,7 @@ Unprivileged users are only able to listen on TCP port 1024 and higher.
 
 The reason that the unprivileged _user_ is able to run a socket-activated nginx container on port 80 is that
 the syscalls `socket()` and `bind()` were run by systemd manager (`systemd`) that is running as root.
-The socket file descriptor is then inherited by the rootless podamn process.
+The socket file descriptor is then inherited by the rootless podman process.
 
 Side-note: There is a [Podman feature request](https://github.com/containers/podman/discussions/20573)
 for adding Podman support for `User=` in systemd system services.
