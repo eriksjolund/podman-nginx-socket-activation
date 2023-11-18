@@ -92,39 +92,25 @@ Configure _socket activation_ for TCP port 80.
 
 The instructions are very similar to Example 1.
 
-1. Create a directory that will be used for building a customized nginx container image
-   ```
-   $ sudo mkdir /root/build
-   ```
-2. Create the file _/root/build/Dockerfile_ with the file contents
-   ```
-   FROM docker.io/library/nginx
-   RUN sed  -i "s/listen\s\+80;/listen 8080;/g" /etc/nginx/conf.d/default.conf
-   ```
-   The new image is configured to use TCP port 8080 instead of TCP port 80.
-3. Build the container image
-   ```
-   $ sudo podman build -t myimage /root/build/
-   ```
-4. Create the file _/etc/containers/systemd/example2.container_ with the file contents
+1. Create the file _/etc/containers/systemd/example2.container_ with the file contents
    ```
    [Unit]
    Requires=example2.socket
    After=example2.socket
 
    [Container]
-   Image=localhost/myimage
+   Image=docker.io/library/nginx
    Environment=NGINX=3;
    [Install]
    WantedBy=default.target
    ```
-5. Optional step for improved security: Edit the file _/etc/containers/systemd/example2.container_
+2. Optional step for improved security: Edit the file _/etc/containers/systemd/example2.container_
    and add this line below the line `[Container]`
    ```
    Network=none
    ```
    For details, see section [_Possibility to restrict the network in the container_](#possibility-to-restrict-the-network-in-the-container)
-6. Create the file _/etc/systemd/system/example1.socket_ that defines the sockets that the container should use
+3. Create the file _/etc/systemd/system/example1.socket_ that defines the sockets that the container should use
    ```
    [Unit]
    Description=Example 2
@@ -135,15 +121,15 @@ The instructions are very similar to Example 1.
    [Install]
    WantedBy=sockets.target
    ```
-7. Reload the systemd configuration
+4. Reload the systemd configuration
    ```
    $ sudo systemctl daemon-reload
    ```
-8. Start the socket
+5. Start the socket
    ```
    $ sudo systemctl start example2.socket
    ```
-9. Test the web server
+6. Test the web server
    ```
    $ curl localhost:80 | head -4
    <!DOCTYPE html>
