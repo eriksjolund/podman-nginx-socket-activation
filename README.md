@@ -211,12 +211,12 @@ The feature request was migrated into a GitHub discussion.
    ExecStart=/usr/bin/podman run \
         --cidfile=/run/user/1000/%N.cid \
         --cgroups=split \
-	--rm \
+        --rm \
         --env "NGINX=3;" \
          -d \
-	--replace \
-	--name mynginx \
-	--sdnotify=conmon \
+        --replace \
+        --name mynginx \
+        --sdnotify=conmon \
         docker.io/library/nginx
    ```
    (To adjust the file for your system, replace `1000` with the UID found in step 2)
