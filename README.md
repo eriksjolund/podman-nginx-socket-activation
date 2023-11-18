@@ -37,7 +37,7 @@ Configure _socket activation_ for TCP port 8080.
    The new image is configured to use TCP port 8080 instead of TCP port 80.
 5. Build the container image
    ```
-   $ podman build -t myimage ./build/
+   $ podman build -t myimage $HOME/build/
    ```
 6. Create the file _$HOME/.config/containers/systemd/example1.container_ with the file contents
    ```
