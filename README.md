@@ -8,7 +8,7 @@ Overview of the examples
 | Example | type of service | Port | Using quadlet | rootful/rootless podman | Comment |
 | --      | --              |   -- | --      | --   | --  |
 | Example 1 | systemd user service | 8080 | yes | rootless podman | |
-| Example 2 | systemd system service | 80 | no | rootful podman | |
+| Example 2 | systemd system service | 80 | yes | rootful podman | |
 | Example 3 | systemd system service (with `User=test`) | 80 | no | rootless podman | experimental |
 
 > **Note**
