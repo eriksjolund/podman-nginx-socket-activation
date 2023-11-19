@@ -421,15 +421,22 @@ The containers communicate over an internal bridge network that has no internet 
    ```
    $ systemctl --user daemon-reload
    ```
+7. Start _apache.service_ and _caddy.service_
+   ```
+   $ systemctl --user start apache.service
+   $ systemctl --user start caddy.service
+   ```
 
-__Side-note__: If the user _test_ is an account with no log in shell, skip step 1 and replace step 6 with
+__Side-note__: If the user _test_ is an account with no log in shell, skip step 1 and replace step 6 and 7 with
 ```
 $ sudo systemctl --user -M test@ daemon-reload
+$ sudo systemctl --user -M test@ start apache.service
+$ sudo systemctl --user -M test@ start caddy.service
 ```
 
 #### test the HTTP reverse proxy
 
-8. Test the nginx HTTP reverse proxy
+1. Test the nginx HTTP reverse proxy
    ```
    $ curl -s --resolve apache.example.com:80:127.0.0.1 apache.example.com:80
    <html><body><h1>It works!</h1></body></html>
