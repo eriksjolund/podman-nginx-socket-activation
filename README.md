@@ -8,7 +8,7 @@ Overview of the examples
 | Example | Type of service | Port | Using quadlet | rootful/rootless podman | Comment |
 | --      | --              |   -- | --      | --   | --  |
 | [Example 1](examples/example1) | systemd user service | 8080 | yes | rootless podman | |
-| [Example 2](examples/example2) | Example 2 | systemd system service | 80 | yes | rootful podman | |
+| [Example 2](examples/example2) | systemd system service | 80 | yes | rootful podman | |
 | [Example 3](examples/example3) | systemd system service (with `User=test`) | 80 | no | rootless podman | Status: experimental |
 | [Example 4](examples/example4) | systemd system service (with `User=test`) | 80 | no | rootless podman | Similar to Example 3 but configured to run as an HTTP reverse proxy. Status: experimental. |
 
