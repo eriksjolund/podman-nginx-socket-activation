@@ -1,0 +1,6 @@
+[Container]
+Image=docker.io/library/apache
+Network=example4-net.network
+ContainerName=apache-container
+[Install]
+WantedBy=default.target

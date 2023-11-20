@@ -1,0 +1,6 @@
+[Container]
+Image=docker.io/library/caddy
+Network=example4-net.network
+ContainerName=caddy-container
+[Install]
+WantedBy=default.target

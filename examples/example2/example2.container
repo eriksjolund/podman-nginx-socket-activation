@@ -1,0 +1,9 @@
+[Unit]
+Requires=example2.socket
+After=example2.socket
+
+[Container]
+Image=docker.io/library/nginx
+Environment=NGINX=3;
+[Install]
+WantedBy=default.target
