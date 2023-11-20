@@ -1,8 +1,0 @@
-[Unit]
-Description=nginx
-
-[Socket]
-ListenStream=0.0.0.0:11080
-
-[Install]
-WantedBy=sockets.target
