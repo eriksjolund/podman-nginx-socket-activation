@@ -63,7 +63,7 @@ Configure _socket activation_ for TCP port 8080.
    After=example1.socket
 
    [Container]
-   Image=localhost/myimage
+   Image=docker.io/library/nginx
    Environment=NGINX=3;
    Volume=%h/nginx_conf_d:/etc/nginx/conf.d:Z
    [Install]
