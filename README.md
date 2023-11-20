@@ -187,7 +187,7 @@ $ cat /proc/sys/net/ipv4/ip_unprivileged_port_start
 
 Unprivileged users are only able to listen on TCP port 1024 and higher.
 
-The reason that the unprivileged _user_ is able to run a socket-activated nginx container on port 80 is that
+The reason that the unprivileged user _test_ is able to run a socket-activated nginx container on port 80 is that
 the syscalls `socket()` and `bind()` were run by systemd manager (`systemd`) that is running as root.
 The socket file descriptor is then inherited by the rootless podman process.
 
@@ -297,7 +297,7 @@ The containers communicate over an internal bridge network that has no internet 
 4. Create the file _/home/test/nginx_conf_d/default.conf_ with the file contents
    ```
    server {
-    listen 8080;
+    listen 80;
     server_name  localhost;
     location / {
         root   /usr/share/nginx/html;
@@ -311,7 +311,7 @@ The containers communicate over an internal bridge network that has no internet 
    ```
    The file contents were created with the command
    ```
-   podman run --rm docker.io/library/nginx /bin/bash -c 'cat /etc/nginx/conf.d/default.conf | grep -v \# | sed "s/listen\s\+80;/listen 8080;/g" | sed /^[[:space:]]*$/d' > default.conf
+   podman run --rm docker.io/library/nginx /bin/bash -c 'cat /etc/nginx/conf.d/default.conf | grep -v \# | sed /^[[:space:]]*$/d' > default.conf
    ```
 4. Create the file _/home/test/nginx_conf_d/apache-example-com.conf_ with the contents
    ```
