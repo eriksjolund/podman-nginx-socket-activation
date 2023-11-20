@@ -1,0 +1,10 @@
+[Unit]
+Requires=example1.socket
+After=example1.socket
+
+[Container]
+Image=docker.io/library/nginx
+Environment=NGINX=3;
+Volume=%h/nginx_conf_d:/etc/nginx/conf.d:Z
+[Install]
+WantedBy=default.target

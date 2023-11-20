@@ -1,0 +1,27 @@
+[Unit]
+Wants=network-online.target
+After=network-online.target
+Requires=user@1000.service
+After=user@1000.service
+RequiresMountsFor=/run/user/1000/containers
+
+[Service]
+User=test
+Environment=PODMAN_SYSTEMD_UNIT=%n
+KillMode=mixed
+ExecStop=/usr/bin/podman rm -f -i --cidfile=/run/user/1000/%N.cid
+ExecStopPost=-/usr/bin/podman rm -f -i --cidfile=/run/user/1000/%N.cid
+Delegate=yes
+Type=notify
+NotifyAccess=all
+SyslogIdentifier=%N
+ExecStart=/usr/bin/podman run \
+     --cidfile=/run/user/1000/%N.cid \
+     --cgroups=split \
+     --rm \
+     --env "NGINX=3;" \
+      -d \
+     --replace \
+     --name systemd-%N \
+     --sdnotify=conmon \
+     docker.io/library/nginx
