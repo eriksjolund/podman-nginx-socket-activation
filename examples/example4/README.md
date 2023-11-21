@@ -94,11 +94,11 @@ The containers communicate over an internal bridge network that does not have in
         --rm \
         --env "NGINX=3;" \
          -d \
-	--network systemd-example4-net \
+        --network systemd-example4-net \
         --replace \
         --name systemd-%N \
         --sdnotify=conmon \
-	--volume /home/test/nginx_conf_d:/etc/nginx/conf.d:Z \
+        --volume /home/test/nginx_conf_d:/etc/nginx/conf.d:Z \
         docker.io/library/nginx
    ```
    (To adjust the file for your system, replace `1000` with the UID found in step 2)

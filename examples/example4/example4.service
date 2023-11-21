@@ -21,9 +21,9 @@ ExecStart=/usr/bin/podman run \
      --rm \
      --env "NGINX=3;" \
       -d \
-	--network systemd-example4-net \
+     --network systemd-example4-net \
      --replace \
      --name systemd-%N \
      --sdnotify=conmon \
-	--volume /home/test/nginx_conf_d:/etc/nginx/conf.d:Z \
+     --volume /home/test/nginx_conf_d:/etc/nginx/conf.d:Z \
      docker.io/library/nginx
