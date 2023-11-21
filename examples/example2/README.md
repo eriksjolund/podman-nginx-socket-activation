@@ -14,7 +14,7 @@ Configure _socket activation_ for TCP port 80.
 
 The instructions are similar to Example 1.
 
-1. Create the file _/etc/containers/systemd/example2.container_ with the file contents
+1. Create the file _/etc/containers/systemd/example2.container_ with the contents
    ```
    [Unit]
    Requires=example2.socket

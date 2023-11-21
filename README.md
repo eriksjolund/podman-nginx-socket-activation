@@ -73,7 +73,7 @@ To try it out, modify the file _~/.config/systemd/user/nginx.service_ according 
  	--cgroups=no-conmon \
  	--rm \
 ```
-and add the file _~/.config/systemd/user/podman-usernamespace.service_ with this contents
+and create the file _~/.config/systemd/user/podman-usernamespace.service_ with this contents
 
 ```
 [Unit]
@@ -96,7 +96,7 @@ This is not a problem when using socket-activated sockets. See Podman GitHub [di
 
 ### Podman installation size can be reduced
 
-The Podman network tools are not needed when __--network=host__  or __--network=none__
-is used (see GitHub [issue comment](https://github.com/containers/podman/discussions/16493#discussioncomment-4140832)).
+The Podman network tools are not needed when using __--network=host__  or __--network=none__
+(see GitHub [issue comment](https://github.com/containers/podman/discussions/16493#discussioncomment-4140832)).
 In other words, the total amount of executables and libraries that are needed by Podman is reduced
 when you run the nginx container with _socket activation_ and __--network=none__.

@@ -12,9 +12,11 @@ graph TB
     a2 -->|"for http://caddy.example.com"| a4["caddy container"]
 ```
 
-This example is similar to [Example 3](../example3) but where the nginx container is configured to act as a HTTP reverse proxy for two
-web server containers (apache httpd and caddy) that are running in systemd user services. All containers are run by rootless podman by the user _test_.
-The containers communicate over an internal bridge network that has no internet access.
+This example is similar to [Example 3](../example3) but here the nginx container is configured
+as an HTTP reverse proxy for two backend web server containers (apache httpd and caddy) that
+are running in systemd user services. All containers are run by rootless podman,
+which belongs to the user _test_.
+The containers communicate over an internal bridge network that does not have internet access.
 
 #### set up _example4.service_
 
@@ -28,7 +30,7 @@ The containers communicate over an internal bridge network that has no internet 
    1000
    ```
 3. Create the directory _/home/test/nginx_conf_d_
-4. Create the file _/home/test/nginx_conf_d/default.conf_ with the file contents
+4. Create the file _/home/test/nginx_conf_d/default.conf_ with the contents
    ```
    server {
     listen 80;
@@ -67,7 +69,7 @@ The containers communicate over an internal bridge network that has no internet 
      }
    }
    ```
-6. Create the file _/etc/systemd/system/example4.service_ with the file contents
+6. Create the file _/etc/systemd/system/example4.service_ with the contents
    ```
    [Unit]
    Wants=network-online.target
@@ -100,7 +102,7 @@ The containers communicate over an internal bridge network that has no internet 
         docker.io/library/nginx
    ```
    (To adjust the file for your system, replace `1000` with the UID found in step 2)
-7. Create the file _/etc/systemd/system/example4.socket_ with the file contents
+7. Create the file _/etc/systemd/system/example4.socket_ with the contents
    ```
    [Unit]
    Description=Example 4 socket
@@ -185,10 +187,22 @@ $ sudo systemctl --user -M test@ start caddy.service
    ```
    Result: Success. The nginx reverse proxy fetched the output from the caddy container.
 
+#### discussion about service dependencies
+
 systemd does not support having dependencies between _systemd system services_ and _systemd user services_.
 Because of that we need to make sure that _example4-nginx.socket_ is started after
 
 * podman has created the network _systemd-example4-net_
 * podman has started _apache-container_ and _caddy-container_
 
+A possible future modification to Example 4 could be to also run the backend web servers inside _systemd system services_ with `User=`.
+Then it would be possible to configure dependencies between the services by adding `After=`, `Depends=`, `Requires=` directives.
+
+#### references
+
 See also the article "_How to create multidomain web applications with Podman and Nginx_" https://www.redhat.com/sysadmin/podman-nginx-multidomain-applications
+It describes a similar setup but neither systemd system service with `User=` nor socket activation is used.
+To be able to bind to port 80, the following command is used:
+```
+sudo sysctl net.ipv4.ip_unprivileged_port_start=80
+```

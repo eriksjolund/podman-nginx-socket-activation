@@ -22,15 +22,15 @@ $ cat /proc/sys/net/ipv4/ip_unprivileged_port_start
 1024
 ```
 
-Unprivileged users are only able to listen on TCP port 1024 and higher.
+Unprivileged users can only listen on TCP port 1024 and above.
 
-The reason that the unprivileged user _test_ is able to run a socket-activated nginx container on port 80 is that
-the syscalls `socket()` and `bind()` were run by systemd manager (`systemd`) that is running as root.
+The reason the unprivileged user _test_ is able to run a socket-activated nginx container on port 80 is that
+the syscalls `socket()` and `bind()` were run by the systemd system manager (`systemd`).
 The socket file descriptor is then inherited by the rootless podman process.
 
-Side-note: There is a [Podman feature request](https://github.com/containers/podman/discussions/20573)
+Side note: There is a [Podman feature request](https://github.com/containers/podman/discussions/20573)
 for adding Podman support for `User=` in systemd system services.
-The feature request was migrated into a GitHub discussion.
+The feature request was moved into a GitHub discussion.
 
 1. Create the user _test_ if it does not yet exist.
    ```
@@ -41,7 +41,7 @@ The feature request was migrated into a GitHub discussion.
    $ id -u test
    1000
    ```
-3. Create the file _/etc/systemd/system/example3.service_ with the file contents
+3. Create the file _/etc/systemd/system/example3.service_ with the contents
    ```
    [Unit]
    Wants=network-online.target
@@ -75,7 +75,7 @@ The feature request was migrated into a GitHub discussion.
 4. Optional step for improved security: Edit the file _/etc/systemd/system/example3.service_
    and add the option `--network none` to the `podman run` command.
    For details, see section [_Possibility to restrict the network in the container_](#possibility-to-restrict-the-network-in-the-container)
-5. Create the file _/etc/systemd/system/example3.socket_ with the file contents
+5. Create the file _/etc/systemd/system/example3.socket_ with the contents
    ```
    [Unit]
    Description=Example 3 socket

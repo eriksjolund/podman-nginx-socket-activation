@@ -22,7 +22,7 @@ Configure _socket activation_ for TCP port 8080.
    ```
    $ mkdir $HOME/nginx_conf_d
    ```
-4. Create the file _$HOME/nginx_conf_d/default.conf_ with the file contents
+4. Create the file _$HOME/nginx_conf_d/default.conf_ with the contents
    ```
    server {
     listen 8080;
@@ -41,7 +41,7 @@ Configure _socket activation_ for TCP port 8080.
    ```
    podman run --rm -ti docker.io/library/nginx /bin/bash -c 'cat /etc/nginx/conf.d/default.conf | grep -v \# | sed "s/listen\s\+80;/listen 8080;/g" | sed /^[[:space:]]*$/d' > default.conf
    ```
-5. Create the file _$HOME/.config/containers/systemd/example1.container_ with the file contents
+5. Create the file _$HOME/.config/containers/systemd/example1.container_ with the contents
    ```
    [Unit]
    Requires=example1.socket
