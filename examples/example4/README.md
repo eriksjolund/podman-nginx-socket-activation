@@ -12,6 +12,14 @@ graph TB
     a2 -->|"for http://caddy.example.com"| a4["caddy container"]
 ```
 
+Containers:
+
+| Container image | Type of service | Role |
+| --              | --              | --   |
+| docker.io/library/nginx | systemd system service with `User=test` | HTTP reverse proxy |
+| docker.io/library/httpd | systemd user service | backend web server |
+| docker.io/library/caddy | systemd user service | backend web server |
+
 This example is similar to [Example 3](../example3) but here the nginx container is configured
 as an HTTP reverse proxy for two backend web server containers (apache httpd and caddy) that
 are running in systemd user services. All containers are run by rootless podman,
