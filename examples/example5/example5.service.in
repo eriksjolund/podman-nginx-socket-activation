@@ -1,0 +1,35 @@
+# This file should be preprocessed with the envsubst command
+# to convert such text strings: ${envsubst_variablename}
+
+[Unit]
+Wants=network-online.target
+After=network-online.target
+Requires=user@${envsubst_uid}.service
+After=user@${envsubst_uid}.service
+RequiresMountsFor=/run/user/1000/containers
+
+[Service]
+User=${envsubst_user}
+Environment=PODMAN_SYSTEMD_UNIT=%n
+KillMode=mixed
+ExecStop=/usr/bin/podman rm -f -i --cidfile=/run/user/${envsubst_uid}/%N.cid
+ExecStopPost=-/usr/bin/podman rm -f -i --cidfile=/run/user/${envsubst_uid}/%N.cid
+Delegate=yes
+Type=notify
+NotifyAccess=all
+SyslogIdentifier=%N
+ExecStart=/usr/bin/podman run \
+     --cidfile=/run/user/${envsubst_uid}/%N.cid \
+     --cgroups=split \
+     --rm \
+     --env "NGINX=3;" \
+      -d \
+     --network=none \
+     --volume /home/${envsubst_user}/socketdir:/var/socketdir:z \
+     --replace \
+     --userns keep-id:uid=101,gid=101 \
+     --user 0:0 \
+     --name systemd-%N \
+     --sdnotify=conmon \
+     --volume /home/${envsubst_user}/nginx-reverse-proxy-conf:/etc/nginx/conf.d:Z \
+     docker.io/library/nginx

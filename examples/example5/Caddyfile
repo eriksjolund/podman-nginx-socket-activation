@@ -1,0 +1,5 @@
+http:// {
+   bind unix//var/socketdir/socket
+	root * /usr/share/caddy
+	file_server
+}

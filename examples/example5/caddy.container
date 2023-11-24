@@ -1,0 +1,9 @@
+[Container]
+Image=docker.io/library/caddy
+ContainerName=caddy-container
+Volume=%h/Caddyfile:/etc/caddy/Caddyfile:Z
+Volume=%h/socketdir:/var/socketdir:z
+Network=none
+
+[Install]
+WantedBy=default.target

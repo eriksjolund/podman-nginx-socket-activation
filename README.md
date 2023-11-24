@@ -7,10 +7,11 @@ Overview of the examples
 
 | Example | Type of service | Port | Using quadlet | rootful/rootless podman | Comment |
 | --      | --              |   -- | --      | --   | --  |
-| [Example 1](examples/example1) | systemd user service | 8080 | yes | rootless podman | |
+| [Example 1](examples/example1) | systemd user service | 8080 | yes | rootless podman | Only unprivileged port numbers can be used |
 | [Example 2](examples/example2) | systemd system service | 80 | yes | rootful podman | |
 | [Example 3](examples/example3) | systemd system service (with `User=test`) | 80 | no | rootless podman | Status: experimental |
 | [Example 4](examples/example4) | systemd system service (with `User=test`) | 80 | no | rootless podman | Similar to Example 3 but configured to run as an HTTP reverse proxy. Status: experimental. |
+| [Example 5](examples/example5) | systemd system service (with `User=test`) | 80 | no | rootless podman | Similar to Example 4 but the containers use `--network=none` and communicate over a Unix socket. Status: experimental. |
 
 > **Note**
 > nginx has no official support for systemd socket activation (feature request: https://trac.nginx.org/nginx/ticket/237). These examples makes use of the fact that "_nginx includes an undocumented, internal socket-passing mechanism_" quote from https://freedesktop.org/wiki/Software/systemd/DaemonSocketActivation/
@@ -100,3 +101,21 @@ The Podman network tools are not needed when using __--network=host__  or __--ne
 (see GitHub [issue comment](https://github.com/containers/podman/discussions/16493#discussioncomment-4140832)).
 In other words, the total amount of executables and libraries that are needed by Podman is reduced
 when you run the nginx container with _socket activation_ and __--network=none__.
+
+### References
+
+__Reference 1:__
+
+The github project [PhracturedBlue/podman-socket-activated-services](https://github.com/PhracturedBlue/podman-socket-activated-services) contains an [example](https://github.com/PhracturedBlue/podman-socket-activated-services/tree/main/reverse-proxy) of a
+customized socket-activated nginx container that watches a directory for Unix sockets that backend applications have created. In case of socket-activated backend application it would have
+been systemd that created the Unix sockets. The __podman run__ option `--network none` is used.
+
+__Reference 2:__
+
+The article "_How to create multidomain web applications with Podman and Nginx_" https://www.redhat.com/sysadmin/podman-nginx-multidomain-applications
+describes running nginx as a reverse proxy with rootless podman.
+In the article rootless podman is given the privilege to listen on port 80 with the command
+```
+sudo sysctl net.ipv4.ip_unprivileged_port_start=80
+```
+Socket activation is not used in the article.
