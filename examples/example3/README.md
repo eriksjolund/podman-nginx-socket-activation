@@ -11,7 +11,7 @@ graph TB
 
 ```
 
-Set up a systemd system service _example3.service_ that is configured to run as the user _test_ (systemd configuration `User=test`)
+Set up a systemd system service _example3.service_ that is configured to run as the user _test3_ (systemd configuration `User=test3`)
 where rootless podman is running the container image  __docker.io/library/nginx__.
 Configure _socket activation_ for TCP port 80.
 
@@ -24,7 +24,7 @@ $ cat /proc/sys/net/ipv4/ip_unprivileged_port_start
 
 Unprivileged users can only listen on TCP port 1024 and above.
 
-The reason the unprivileged user _test_ is able to run a socket-activated nginx container on port 80 is that
+The reason the unprivileged user _test3_ is able to run a socket-activated nginx container on port 80 is that
 the syscalls `socket()` and `bind()` were run by the systemd system manager (`systemd`).
 The socket file descriptor is then inherited by the rootless podman process.
 
@@ -32,13 +32,13 @@ Side note: There is a [Podman feature request](https://github.com/containers/pod
 for adding Podman support for `User=` in systemd system services.
 The feature request was moved into a GitHub discussion.
 
-1. Create the user _test_ if it does not yet exist.
+1. Create the user _test3_ if it does not yet exist.
    ```
-   $ sudo useradd test
+   $ sudo useradd test3
    ```
-2. Check the UID of the user _test_
+2. Check the UID of the user _test3_
    ```
-   $ id -u test
+   $ id -u test3
    1000
    ```
 3. Create the file _/etc/systemd/system/example3.service_ with the contents
@@ -51,7 +51,7 @@ The feature request was moved into a GitHub discussion.
    RequiresMountsFor=/run/user/1000/containers
    
    [Service]
-   User=test
+   User=test3
    Environment=PODMAN_SYSTEMD_UNIT=%n
    KillMode=mixed
    ExecStop=/usr/bin/podman rm -f -i --cidfile=/run/user/1000/%N.cid

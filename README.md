@@ -9,9 +9,9 @@ Overview of the examples
 | --      | --              |   -- | --      | --   | --  |
 | [Example 1](examples/example1) | systemd user service | 8080 | yes | rootless podman | Only unprivileged port numbers can be used |
 | [Example 2](examples/example2) | systemd system service | 80 | yes | rootful podman | |
-| [Example 3](examples/example3) | systemd system service (with `User=test`) | 80 | no | rootless podman | Status: experimental |
-| [Example 4](examples/example4) | systemd system service (with `User=test`) | 80 | no | rootless podman | Similar to Example 3 but configured to run as an HTTP reverse proxy. Status: experimental. |
-| [Example 5](examples/example5) | systemd system service (with `User=test`) | 80 | no | rootless podman | Similar to Example 4 but the containers use `--network=none` and communicate over a Unix socket. Status: experimental. |
+| [Example 3](examples/example3) | systemd system service (with `User=test3`) | 80 | no | rootless podman | Status: experimental |
+| [Example 4](examples/example4) | systemd system service (with `User=test4`) | 80 | no | rootless podman | Similar to Example 3 but configured to run as an HTTP reverse proxy. Status: experimental. |
+| [Example 5](examples/example5) | systemd system service (with `User=test5`) | 80 | no | rootless podman | Similar to Example 4 but the containers use `--network=none` and communicate over a Unix socket. Status: experimental. |
 
 > **Note**
 > nginx has no official support for systemd socket activation (feature request: https://trac.nginx.org/nginx/ticket/237). These examples makes use of the fact that "_nginx includes an undocumented, internal socket-passing mechanism_" quote from https://freedesktop.org/wiki/Software/systemd/DaemonSocketActivation/
