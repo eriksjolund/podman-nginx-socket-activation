@@ -17,7 +17,7 @@ Containers:
 | Container image | Type of service | Role | Network | Socket activation |
 | --              | --              | --   | --      | --                |
 | docker.io/library/nginx | systemd system service with `User=test4` | HTTP reverse proxy | [internal bridge network](example4-net.network) | :heavy_check_mark: |
-| docker.io/library/httpd | systemd user service | [internal bridge network](example4-net.network) | backend web server | |
+| docker.io/library/httpd | systemd user service | backend web server | [internal bridge network](example4-net.network) | |
 | docker.io/library/caddy | systemd user service | backend web server | [internal bridge network](example4-net.network) | |
 
 This example is similar to [Example 3](../example3) but here the nginx container is configured
