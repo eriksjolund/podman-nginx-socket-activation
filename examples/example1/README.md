@@ -87,3 +87,27 @@ Configure _socket activation_ for TCP port 8080.
     <head>
     <title>Welcome to nginx!</title>
     ```
+
+### Discussion
+
+The default configuration for _ip_unprivileged_port_start_ was used
+
+```
+$ cat /proc/sys/net/ipv4/ip_unprivileged_port_start
+1024
+```
+TCP port 8080 is thus an unprivileged port.
+
+To use the method described in Example 1 for TCP port 80 instead, you need to
+modify the Linux kernel setting _ip_unprivileged_port_start_ to the number
+80 or less.
+
+Create the file  _/etc/sysctl.d/99-unprivileged-port.conf_ with the contents
+```
+net.ipv4.ip_unprivileged_port_start=80
+```
+Reload sysctl configuration
+```
+sudo sysctl --system
+```
+Note that any user on the system could then bind to port 80 if it is unused.
