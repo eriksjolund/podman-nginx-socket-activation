@@ -1,22 +1,25 @@
+# This file should be preprocessed with the envsubst command
+# to convert such text strings: ${envsubst_variablename}
+
 [Unit]
 Wants=network-online.target
 After=network-online.target
-Requires=user@1000.service
-After=user@1000.service
+Requires=user@${envsubst_uid}.service
+After=user@${envsubst_uid}.service
 RequiresMountsFor=/run/user/1000/containers
 
 [Service]
-User=test
+User=${envsubst_user}
 Environment=PODMAN_SYSTEMD_UNIT=%n
 KillMode=mixed
-ExecStop=/usr/bin/podman rm -f -i --cidfile=/run/user/1000/%N.cid
-ExecStopPost=-/usr/bin/podman rm -f -i --cidfile=/run/user/1000/%N.cid
+ExecStop=/usr/bin/podman rm -f -i --cidfile=/run/user/${envsubst_uid}/%N.cid
+ExecStopPost=-/usr/bin/podman rm -f -i --cidfile=/run/user/${envsubst_uid}/%N.cid
 Delegate=yes
 Type=notify
 NotifyAccess=all
 SyslogIdentifier=%N
 ExecStart=/usr/bin/podman run \
-     --cidfile=/run/user/1000/%N.cid \
+     --cidfile=/run/user/${envsubst_uid}/%N.cid \
      --cgroups=split \
      --rm \
      --env "NGINX=3;" \
@@ -25,5 +28,5 @@ ExecStart=/usr/bin/podman run \
      --replace \
      --name systemd-%N \
      --sdnotify=conmon \
-     --volume /home/test/nginx_conf_d:/etc/nginx/conf.d:Z \
+     --volume /home/${envsubst_user}/nginx-reverse-proxy-conf:/etc/nginx/conf.d:Z \
      docker.io/library/nginx

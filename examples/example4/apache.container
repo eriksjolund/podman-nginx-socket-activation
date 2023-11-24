@@ -1,5 +1,5 @@
 [Container]
-Image=docker.io/library/apache
+Image=docker.io/library/httpd
 Network=example4-net.network
 ContainerName=apache-container
 [Install]
