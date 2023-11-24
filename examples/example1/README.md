@@ -39,7 +39,7 @@ Configure _socket activation_ for TCP port 8080.
    ```
    The file contents were created with the command
    ```
-   podman run --rm -ti docker.io/library/nginx /bin/bash -c 'cat /etc/nginx/conf.d/default.conf | grep -v \# | sed "s/listen\s\+80;/listen 8080;/g" | sed /^[[:space:]]*$/d' > default.conf
+   podman run --rm docker.io/library/nginx /bin/bash -c 'cat /etc/nginx/conf.d/default.conf | grep -v \# | sed "s/listen\s\+80;/listen 8080;/g" | sed /^[[:space:]]*$/d' > default.conf
    ```
 5. Create the file _$HOME/.config/containers/systemd/example1.container_ with the contents
    ```
