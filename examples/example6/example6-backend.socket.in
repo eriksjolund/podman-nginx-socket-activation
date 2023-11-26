@@ -1,0 +1,10 @@
+[Unit]
+Description=Example 6 backend socket
+
+[Socket]
+ListenStream=/run/user/${envsubst_uid}/backend-socket
+SocketUser=${envsubst_user}
+SocketGroup=${envsubst_user}
+SocketMode=0600
+[Install]
+WantedBy=sockets.target
