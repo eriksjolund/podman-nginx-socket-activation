@@ -6,7 +6,7 @@ Wants=network-online.target
 After=network-online.target
 Requires=user@${envsubst_uid}.service
 After=user@${envsubst_uid}.service
-RequiresMountsFor=/run/user/1000/containers
+RequiresMountsFor=/run/user/${envsubst_uid}/containers
 
 [Service]
 User=${envsubst_user}
