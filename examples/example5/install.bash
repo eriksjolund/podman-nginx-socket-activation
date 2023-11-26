@@ -13,16 +13,16 @@ sudo useradd -- "$user"
 uid=$(id -u -- "$user")
 sourcedir="$repodir/examples/example5"
 
-sudo install -Z -d -o "$user" -g "$user" "/home/$user/nginx-reverse-proxy-conf"
-sudo install -Z -D -o "$user" -g "$user" --target-directory "/home/$user/nginx-reverse-proxy-conf" "$sourcedir/nginx-reverse-proxy-conf/caddy-example-com.conf"
-sudo install -Z -D -o "$user" -g "$user" --target-directory "/home/$user/nginx-reverse-proxy-conf" "$sourcedir/nginx-reverse-proxy-conf/default.conf"
+sudo install --mode 0755 -Z -d -o "$user" -g "$user" "/home/$user/nginx-reverse-proxy-conf"
+sudo install --mode 0644 -Z -D -o "$user" -g "$user" --target-directory "/home/$user/nginx-reverse-proxy-conf" "$sourcedir/nginx-reverse-proxy-conf/caddy-example-com.conf"
+sudo install --mode 0644 -Z -D -o "$user" -g "$user" --target-directory "/home/$user/nginx-reverse-proxy-conf" "$sourcedir/nginx-reverse-proxy-conf/default.conf"
 
-sudo install -Z -d -o "$user" -g "$user" "/home/$user/socketdir"
-sudo install -Z -D -o "$user" -g "$user" --target-directory "/home/$user" "$sourcedir/Caddyfile"
+sudo install --mode 0755 -Z -d -o "$user" -g "$user" "/home/$user/socketdir"
+sudo install --mode 0644 -Z -D -o "$user" -g "$user" --target-directory "/home/$user" "$sourcedir/Caddyfile"
 
-sudo install -Z -d -o "$user" -g "$user" "/home/$user/.config/containers/systemd"
-sudo install -Z -D -o "$user" -g "$user" --target-directory "/home/$user/.config/containers/systemd" "$sourcedir/caddy.container"
-sudo install -Z -D -o root -g root --target-directory /etc/systemd/system/ "$sourcedir/example5.socket"
+sudo install --mode 0755 -Z -d -o "$user" -g "$user" "/home/$user/.config/containers/systemd"
+sudo install --mode 0644 -Z -D -o "$user" -g "$user" --target-directory "/home/$user/.config/containers/systemd" "$sourcedir/caddy.container"
+sudo install --mode 0644 -Z -D -o root -g root --target-directory /etc/systemd/system/ "$sourcedir/example5.socket"
 
 # envsubst is used for text replacement in example5.service
 cat $repodir/examples/example5/example5.service.in | sudo bash -c "cat - | envsubst_user=$user envsubst_uid=$uid envsubst > /etc/systemd/system/example5.service"
