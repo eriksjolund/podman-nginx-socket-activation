@@ -8,14 +8,13 @@ status: experimental
 graph TB
 
     a1[curl localhost:80] -.->a2[nginx container in systemd system service with directive User=]
-
 ```
 
 Set up a systemd system service _example3.service_ that is configured to run as the user _test3_ (systemd configuration `User=test3`)
-where rootless podman is running the container image  __docker.io/library/nginx__.
+where rootless podman is running the container image __docker.io/library/nginx__.
 Configure _socket activation_ for TCP port 80.
 
-The default configuration for _ip_unprivileged_port_start_ is used
+The default configuration for _ip_unprivileged_port_start_ can be used
 
 ```
 $ cat /proc/sys/net/ipv4/ip_unprivileged_port_start
@@ -25,14 +24,20 @@ $ cat /proc/sys/net/ipv4/ip_unprivileged_port_start
 Unprivileged users can only listen on TCP port 1024 and above.
 
 The reason the unprivileged user _test3_ is able to run a socket-activated nginx container on port 80 is that
-the syscalls `socket()` and `bind()` were run by the systemd system manager (`systemd`).
+the syscalls `socket()` and `bind()` were run by the systemd system manager (`systemd`) which is running as root.
 The socket file descriptor is then inherited by the rootless podman process.
 
 Side note: There is a [Podman feature request](https://github.com/containers/podman/discussions/20573)
 for adding Podman support for `User=` in systemd system services.
 The feature request was moved into a GitHub discussion.
 
-1. Create the user _test3_ if it does not yet exist.
+## Requirements
+
+These instructions were tested on Fedora 39 with Podman 4.7.2.
+
+## Install instructions
+
+1. Create the user _test3_
    ```
    $ sudo useradd test3
    ```
@@ -71,11 +76,11 @@ The feature request was moved into a GitHub discussion.
         --sdnotify=conmon \
         docker.io/library/nginx
    ```
-   (To adjust the file for your system, replace `1000` with the UID found in step 2)
-4. Optional step for improved security: Edit the file _/etc/systemd/system/example3.service_
+4. Edit the file _/etc/systemd/system/example3.service_ and replace `1000` with the UID found in step 2.
+5. Optional step for improved security: Edit the file _/etc/systemd/system/example3.service_
    and add the option `--network none` to the `podman run` command.
    For details, see section [_Possibility to restrict the network in the container_](#possibility-to-restrict-the-network-in-the-container)
-5. Create the file _/etc/systemd/system/example3.socket_ with the contents
+6. Create the file _/etc/systemd/system/example3.socket_ with the contents
    ```
    [Unit]
    Description=Example 3 socket
@@ -86,15 +91,18 @@ The feature request was moved into a GitHub discussion.
    [Install]
    WantedBy=sockets.target
    ```
-6. Reload the systemd configuration
+7. Reload the systemd configuration
    ```
    $ sudo systemctl daemon-reload
    ```
-7. Start the socket
+8. Start the socket
    ```
    $ sudo systemctl start example3.socket
    ```
-8. Test the web server
+
+## Test the nginx web server
+
+1. Test the web server
    ```
    $ curl localhost:80 | head -4
    <!DOCTYPE html>
