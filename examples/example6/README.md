@@ -39,7 +39,6 @@ These install instructions will create the new user _test6_ and install these fi
 /etc/systemd/system/example6-proxy.service
 /etc/systemd/system/example6-backend.socket
 /etc/systemd/system/example6-backend.service
-
 /home/test6/nginx-reverse-proxy-conf/nginx-example-com.conf
 /home/test6/nginx-reverse-proxy-conf/default.conf
 /run/user/1006/backend-socket
