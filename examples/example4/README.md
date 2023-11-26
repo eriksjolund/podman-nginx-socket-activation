@@ -22,7 +22,7 @@ Containers:
 
 This example is similar to [Example 3](../example3) but here the nginx container is configured
 as an HTTP reverse proxy for two backend web server containers (apache httpd and caddy).
-All containers are run by rootless podman, which belongs to the user _test_.
+All containers are run by rootless podman, which belongs to the user _test4_.
 The containers communicate over an internal bridge network that does not have internet access.
 
 ## Requirements

@@ -24,7 +24,7 @@ Containers:
 This example is similar to [Example 5](../example5) but here the backend web server is
 started with _socket activation_ from a _systemd system service_ with `User=test6`.
 No systemd user services are used.
-All containers are run by rootless podman, which belongs to the user _test_.
+All containers are run by rootless podman, which belongs to the user _test6_.
 
 ## Requirements
 
