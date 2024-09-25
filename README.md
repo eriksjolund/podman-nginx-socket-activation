@@ -20,7 +20,7 @@ Overview of the examples
 ## Advantages of using rootless Podman with socket activation
 
 ### Native network performance over the socket-activated socket
-Communication over the socket-activated socket does not pass through slirp4netns so it has the same performance characteristics as the normal network on the host.
+Communication over the socket-activated socket does not pass through _pasta_ or _slirp4netns_ so it has the same performance characteristics as the normal network on the host.
 
 See the [Podman socket activation tutorial](https://github.com/containers/podman/blob/main/docs/tutorials/socket_activation.md#native-network-performance-over-the-socket-activated-socket).
 
