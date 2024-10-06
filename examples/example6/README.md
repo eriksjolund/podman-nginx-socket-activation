@@ -8,7 +8,7 @@ status: experimental
 graph TB
 
     a1[curl] -.->a2[nginx container reverse proxy]
-    a2 -->|"for http://nginx.example.com"| a4["nginx backend container"]
+    a2 -->|"for http&colon;//nginx.example.com"| a4["nginx backend container"]
 ```
 
 Containers:
