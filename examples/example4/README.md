@@ -8,8 +8,8 @@ status: experimental
 graph TB
 
     a1[curl] -.->a2[nginx container reverse proxy]
-    a2 -->|"for http://apache.example.com"| a3["apache httpd container"]
-    a2 -->|"for http://caddy.example.com"| a4["caddy container"]
+    a2 -->|"for http&colon;//apache.example.com"| a3["apache httpd container"]
+    a2 -->|"for http&colon;//caddy.example.com"| a4["caddy container"]
 ```
 
 Containers:
