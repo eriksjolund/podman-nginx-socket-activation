@@ -19,9 +19,9 @@ Containers:
 
 | Container image | Type of service | Role | Network | Socket activation |
 | --              | --              | --   | --      | --                |
-| docker.io/library/nginx | systemd user service | HTTP reverse proxy | [internal bridge network](example4-net.network) | :heavy_check_mark: |
-| docker.io/traefik/whoami | systemd user service | backend web server | [internal bridge network](example4-net.network) | |
-| docker.io/traefik/whoami | systemd user service | backend web server | [internal bridge network](example4-net.network) | |
+| docker.io/library/nginx | systemd user service | HTTP reverse proxy | [internal bridge network](example7.network) | :heavy_check_mark: |
+| docker.io/traefik/whoami | systemd user service | backend web server | [internal bridge network](example7.network) | |
+| docker.io/traefik/whoami | systemd user service | backend web server | [internal bridge network](example7.network) | |
 
 This example is similar to [Example 4](../example4) but here the nginx container is configured
 as an HTTP reverse proxy for two backend web server containers (whoami1 and whoami2).
