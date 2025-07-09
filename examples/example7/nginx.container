@@ -1,0 +1,15 @@
+[Unit]
+After=nginx.socket
+Requires=nginx.socket
+
+[Container]
+ContainerName=nginx
+Environment=NGINX=3:4;
+Image=docker.io/library/nginx
+Network=example7.network
+Volume=%h/podman-nginx-socket-activation/examples/example7/nginx-reverse-proxy-conf/whoami1-example-com.conf:/etc/nginx/conf.d/whoami-1example-com.conf:Z
+Volume=%h/podman-nginx-socket-activation/examples/example7/nginx-reverse-proxy-conf/whoami2-example-com.conf:/etc/nginx/conf.d/whoami2-example-com.conf:Z
+Volume=%h/podman-nginx-socket-activation/examples/example7/nginx-reverse-proxy-conf/default.conf:/etc/nginx/conf.d/default.conf:Z
+Volume=%h/server.key:/etc/ssl/private/server.key:Z
+Volume=%h/server.crt:/etc/ssl/certs/server.crt:Z
+
