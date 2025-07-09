@@ -5,14 +5,15 @@ See also the [Podman socket activation tutorial](https://github.com/containers/p
 
 Overview of the examples
 
-| Example | Type of service | Port | Using quadlet | rootful/rootless podman | Comment |
+| Example | Type of service | Ports | Using quadlet | rootful/rootless podman | Comment |
 | --      | --              |   -- | --      | --   | --  |
-| [Example 1](examples/example1) | systemd user service | 8080 | yes | rootless podman | Only unprivileged port numbers can be used |
-| [Example 2](examples/example2) | systemd system service | 80 | yes | rootful podman | |
-| [Example 3](examples/example3) | systemd system service (with `User=test3`) | 80 | no | rootless podman | Status: experimental |
-| [Example 4](examples/example4) | systemd system service (with `User=test4`) | 80 | no | rootless podman | Similar to Example 3 but configured to run as an HTTP reverse proxy. Status: experimental. |
-| [Example 5](examples/example5) | systemd system service (with `User=test5`) | 80 | no | rootless podman | Similar to Example 4 but the containers use `--network=none` and communicate over a Unix socket. Status: experimental. |
-| [Example 6](examples/example6) | systemd system service (with `User=test6`) | 80 | no | rootless podman | Similar to Example 5 but the backend web server is started with _socket activation_ in a _systemd system service_ with `User=test6`. Status: experimental. |
+| [Example 1](examples/example1) | systemd user service | 8080/TCP | yes | rootless podman | Only unprivileged port numbers can be used |
+| [Example 2](examples/example2) | systemd system service | 80/TCP | yes | rootful podman | |
+| [Example 3](examples/example3) | systemd system service (with `User=test3`) | 80/TCP | no | rootless podman | Status: experimental |
+| [Example 4](examples/example4) | systemd system service (with `User=test4`) | 80/TCP | no | rootless podman | Similar to Example 3 but configured to run as an HTTP reverse proxy. Status: experimental. |
+| [Example 5](examples/example5) | systemd system service (with `User=test5`) | 80/TCP | no | rootless podman | Similar to Example 4 but the containers use `--network=none` and communicate over a Unix socket. Status: experimental. |
+| [Example 6](examples/example6) | systemd system service (with `User=test6`) | 80/TCP | no | rootless podman | Similar to Example 5 but the backend web server is started with _socket activation_ in a _systemd system service_ with `User=test6`. Status: experimental. |
+| [Example 7](examples/example7) | systemd user service | 80/TCP, 443/TCP | yes | rootless podman | HTTP reverse proxy with two backend containers. `ip_unprivileged_port_start` ≤ 80 is required. Status: beta. |
 
 > **Note**
 > nginx has no official support for systemd socket activation (feature request: https://trac.nginx.org/nginx/ticket/237). These examples makes use of the fact that "_nginx includes an undocumented, internal socket-passing mechanism_" quote from https://freedesktop.org/wiki/Software/systemd/DaemonSocketActivation/

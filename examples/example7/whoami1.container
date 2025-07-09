@@ -1,0 +1,4 @@
+[Container]
+Image=docker.io/traefik/whoami
+ContainerName=whoami1
+Network=example7.network
