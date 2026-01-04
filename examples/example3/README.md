@@ -104,7 +104,7 @@ These instructions were tested on Fedora 39 with Podman 4.7.2.
 
 1. Test the web server
    ```
-   $ curl -s localhost:80 | head -4
+   $ curl -s -S localhost:80 | head -4
    <!DOCTYPE html>
    <html>
    <head>
