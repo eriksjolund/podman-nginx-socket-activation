@@ -27,11 +27,13 @@ install --mode 0644 -Z -D -o "$user" -g "$user" --target-directory "/home/$user/
 install --mode 0755 -Z -d -o "$user" -g "$user" "/home/$user/nginx-backend-conf"
 install --mode 0644 -Z -D -o "$user" -g "$user" --target-directory "/home/$user/nginx-backend-conf" "$sourcedir/nginx-backend-conf/default.conf"
 
+install --mode 0755 -Z -d -o "$user" -g "$user" "/home/$user/.config"
+install --mode 0755 -Z -d -o "$user" -g "$user" "/home/$user/.config/containers"
 install --mode 0755 -Z -d -o "$user" -g "$user" "/home/$user/.config/containers/systemd"
 install --mode 0644 -Z -D -o "$user" -g "$user" --target-directory "/home/$user/.config/containers/systemd" "$sourcedir/nginx.container"
 install --mode 0644 -Z -D -o root -g root --target-directory /etc/systemd/system/ "$sourcedir/example6-proxy.socket"
 
-# envsubst is used for text replacement
+# envsubst is used for substituting placeholders in the text with environment variable values
 cat $repodir/examples/example6/example6-proxy.service.in | envsubst_user=$user envsubst_uid=$uid envsubst > /etc/systemd/system/example6-proxy.service
 cat $repodir/examples/example6/example6-backend.service.in | envsubst_user=$user envsubst_uid=$uid envsubst > /etc/systemd/system/example6-backend.service
 cat $repodir/examples/example6/example6-backend.socket.in | envsubst_user=$user envsubst_uid=$uid envsubst > /etc/systemd/system/example6-backend.socket

@@ -22,6 +22,8 @@ install --mode 0644 -Z -D -o "$user" -g "$user" --target-directory "/home/$user/
 install --mode 0755 -Z -d -o "$user" -g "$user" "/home/$user/socketdir"
 install --mode 0644 -Z -D -o "$user" -g "$user" --target-directory "/home/$user" "$sourcedir/Caddyfile"
 
+install --mode 0755 -Z -d -o "$user" -g "$user" "/home/$user/.config"
+install --mode 0755 -Z -d -o "$user" -g "$user" "/home/$user/.config/containers"
 install --mode 0755 -Z -d -o "$user" -g "$user" "/home/$user/.config/containers/systemd"
 install --mode 0644 -Z -D -o "$user" -g "$user" --target-directory "/home/$user/.config/containers/systemd" "$sourcedir/caddy.container"
 install --mode 0644 -Z -D -o root -g root --target-directory /etc/systemd/system/ "$sourcedir/example5.socket"
