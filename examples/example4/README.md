@@ -35,7 +35,7 @@ These install instructions will create the new user _test4_ and install these fi
 
 ```
 /etc/systemd/system/example4.socket
-/etc/systemd/system/example4.service
+/etc/containers/systemd/example4.container
 /home/test4/.config/containers/systemd/caddy.container
 /home/test4/.config/containers/systemd/apache.container
 /home/test4/.config/containers/systemd/example4-net.network
