@@ -30,7 +30,7 @@ install --mode 0644 -Z -D -o "$user" -g "$user" --target-directory "/home/$user/
 install --mode 0644 -Z -D -o root -g root --target-directory /etc/systemd/system/ "$sourcedir/example4.socket"
 
 # envsubst is used for substituting placeholders in the text with environment variable values
-cat $repodir/examples/example4/example4.container.in | envsubst_user=$user envsubst_uid=$uid envsubst > /etc/container/system/example4.container
+cat $repodir/examples/example4/example4.container.in | envsubst_user=$user envsubst_uid=$uid envsubst > /etc/containers/systemd/example4.container
 
 loginctl enable-linger "$user"
 
