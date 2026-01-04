@@ -88,10 +88,9 @@ and start _caddy.service_ and _example5.socket_.
 
 ## Discussion about service dependencies
 
-systemd does not support having dependencies between _systemd system services_ and _systemd user services_.
+systemd does not support having dependencies (such as `After=`, `Depends=`, `Requires=`) between _systemd system services_ and _systemd user services_.
 Because of that we need to make sure that _example5.service_ is started after
 
 * podman has started the _caddy-container_
 
-A possible future modification to Example 5 could be to also run the backend web servers inside _systemd system services_ with `User=`.
-Then it would be possible to configure dependencies between the services by adding `After=`, `Depends=`, `Requires=` directives.
+See also [Example 6](../example6) where all the containers are running in _systemd system services_ with the systemd directive `User=`.
