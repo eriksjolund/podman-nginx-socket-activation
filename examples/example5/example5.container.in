@@ -1,0 +1,16 @@
+[Unit]
+Requires=user@${envsubst_uid}.service
+After=user@${envsubst_uid}.service
+RequiresMountsFor=/run/user/${envsubst_uid}/containers
+
+[Service]
+User=${envsubst_user}
+
+[Container]
+Environment=NGINX=3;
+Image=docker.io/library/nginx
+Network=none
+User=0:0
+UserNS=keep-id:uid=101,gid=101
+Volume=/home/${envsubst_user}/nginx-reverse-proxy-conf:/etc/nginx/conf.d:Z
+Volume=/home/${envsubst_user}/socketdir:/var/socketdir:z

@@ -29,11 +29,8 @@ install --mode 0644 -Z -D -o "$user" -g "$user" --target-directory "/home/$user/
 install --mode 0644 -Z -D -o "$user" -g "$user" --target-directory "/home/$user/.config/containers/systemd" "$sourcedir/example4-net.network"
 install --mode 0644 -Z -D -o root -g root --target-directory /etc/systemd/system/ "$sourcedir/example4.socket"
 
-# envsubst is used for text replacement in example4.service
-
-"$sourcedir/nginx.container" /etc/containers/systemd/nginx.container
-
-cat $repodir/examples/example4/nginx.container | envsubst_user=$user envsubst_uid=$uid envsubst > /etc/container/system/example4.container
+# envsubst is used for substituting placeholders in the text with environment variable values
+cat $repodir/examples/example4/example4.container.in | envsubst_user=$user envsubst_uid=$uid envsubst > /etc/container/system/example4.container
 
 loginctl enable-linger "$user"
 
