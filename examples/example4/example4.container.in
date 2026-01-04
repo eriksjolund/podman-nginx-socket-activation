@@ -1,0 +1,13 @@
+[Unit]
+Requires=user@${envsubst_uid}.service
+After=user@${envsubst_uid}.service
+RequiresMountsFor=/run/user/${envsubst_uid}/containers
+
+[Service]
+User=${envsubst_user}
+
+[Container]
+Environment=NGINX=3;
+Image=docker.io/library/nginx
+Network=systemd-example4-net
+Volume=/home/${envsubst_user}/nginx-reverse-proxy-conf:/etc/nginx/conf.d:Z
