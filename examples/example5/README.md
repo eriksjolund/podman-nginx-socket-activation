@@ -78,7 +78,7 @@ and start _caddy.service_ and _example5.socket_.
 
 1. Test the nginx HTTP reverse proxy
    ```
-   $ curl -s --resolve caddy.example.com:80:127.0.0.1 caddy.example.com:80 | head -4
+   $ curl -s -S --resolve caddy.example.com:80:127.0.0.1 caddy.example.com:80 | head -4
    <!DOCTYPE html>
    <html>
    <head>

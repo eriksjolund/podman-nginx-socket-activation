@@ -81,7 +81,7 @@ Configure _socket activation_ for TCP port 8080.
     ```
 10. Test the web server
     ```
-    $ curl -s localhost:8080 | head -4
+    $ curl -s -S localhost:8080 | head -4
     <!DOCTYPE html>
     <html>
     <head>
