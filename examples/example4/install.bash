@@ -18,6 +18,8 @@ sudo install --mode 0644 -Z -D -o "$user" -g "$user" --target-directory "/home/$
 sudo install --mode 0644 -Z -D -o "$user" -g "$user" --target-directory "/home/$user/nginx-reverse-proxy-conf" "$sourcedir/nginx-reverse-proxy-conf/caddy-example-com.conf"
 sudo install --mode 0644 -Z -D -o "$user" -g "$user" --target-directory "/home/$user/nginx-reverse-proxy-conf" "$sourcedir/nginx-reverse-proxy-conf/default.conf"
 
+sudo install --mode 0755 -Z -d -o "$user" -g "$user" "/home/$user/.config"
+sudo install --mode 0755 -Z -d -o "$user" -g "$user" "/home/$user/.config/containers"
 sudo install --mode 0755 -Z -d -o "$user" -g "$user" "/home/$user/.config/containers/systemd"
 sudo install --mode 0644 -Z -D -o "$user" -g "$user" --target-directory "/home/$user/.config/containers/systemd" "$sourcedir/apache.container"
 sudo install --mode 0644 -Z -D -o "$user" -g "$user" --target-directory "/home/$user/.config/containers/systemd" "$sourcedir/caddy.container"
