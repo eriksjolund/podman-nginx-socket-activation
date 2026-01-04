@@ -79,12 +79,12 @@ and start _caddy.service_, _apache.service_ and _example4.socket_.
 
 1. Test the nginx HTTP reverse proxy
    ```
-   $ curl -s --resolve apache.example.com:80:127.0.0.1 apache.example.com:80
+   $ curl -s -S --resolve apache.example.com:80:127.0.0.1 apache.example.com:80
    <html><body><h1>It works!</h1></body></html>
    ```
    Result: Success. The nginx reverse proxy fetched the output from the apache httpd container.
    ```
-   $ curl -s --resolve caddy.example.com:80:127.0.0.1 caddy.example.com:80 | head -4
+   $ curl -s -S --resolve caddy.example.com:80:127.0.0.1 caddy.example.com:80 | head -4
    <!DOCTYPE html>
    <html>
    <head>

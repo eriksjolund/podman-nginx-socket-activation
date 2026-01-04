@@ -77,7 +77,7 @@ The install instructions will also start _example6-proxy.socket_ and _example6-b
 
 1. Test the nginx HTTP reverse proxy
    ```
-   $ curl -s --resolve nginx.example.com:80:127.0.0.1 nginx.example.com:80 | head -4
+   $ curl -s -S --resolve nginx.example.com:80:127.0.0.1 nginx.example.com:80 | head -4
     <!DOCTYPE html>
     <html>
     <head>

@@ -77,7 +77,7 @@ These instructions were tested on Fedora 42 with Podman 5.5.1.
 
 1. Test the nginx HTTP reverse proxy by download https://whoami1.example.com
    ```
-   curl --resolve whoami1.example.com:443:127.0.0.1 --cacert ~/ca.crt https://whoami1.example.com
+   curl -s -S --resolve whoami1.example.com:443:127.0.0.1 --cacert ~/ca.crt https://whoami1.example.com
    ```
    The following output is printed
    ```
@@ -98,7 +98,7 @@ These instructions were tested on Fedora 42 with Podman 5.5.1.
    ```
 2. Test that HTTP redirect works for the URL http://whoami1.example.com
    ```
-   curl --resolve whoami1.example.com:80:127.0.0.1 -sD - http://whoami1.example.com -o /dev/null
+   curl -s -S --resolve whoami1.example.com:80:127.0.0.1 -sD - http://whoami1.example.com -o /dev/null
    ```
    The following output is printed
    ```   
