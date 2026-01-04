@@ -34,8 +34,8 @@ install --mode 0644 -Z -D -o "$user" -g "$user" --target-directory "/home/$user/
 install --mode 0644 -Z -D -o root -g root --target-directory /etc/systemd/system/ "$sourcedir/example6-proxy.socket"
 
 # envsubst is used for substituting placeholders in the text with environment variable values
-cat $repodir/examples/example6/example6-proxy.service.in | envsubst_user=$user envsubst_uid=$uid envsubst > /etc/systemd/system/example6-proxy.service
-cat $repodir/examples/example6/example6-backend.service.in | envsubst_user=$user envsubst_uid=$uid envsubst > /etc/systemd/system/example6-backend.service
+cat $repodir/examples/example6/example6-proxy.container.in | envsubst_user=$user envsubst_uid=$uid envsubst > /etc/containers/systemd/example6-proxy.container
+cat $repodir/examples/example6/example6-backend.container.in | envsubst_user=$user envsubst_uid=$uid envsubst > /etc/containers/systemd/example6-backend.container
 cat $repodir/examples/example6/example6-backend.socket.in | envsubst_user=$user envsubst_uid=$uid envsubst > /etc/systemd/system/example6-backend.socket
 cat $repodir/examples/example6/nginx-backend-conf/nginx-example-com.conf.in | envsubst_user=$user envsubst_uid=$uid envsubst > /home/$user/nginx-backend-conf/nginx-example-com.conf
 
