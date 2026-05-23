@@ -3,6 +3,7 @@ Description=Example 2
 
 [Socket]
 ListenStream=0.0.0.0:80
+NoDelay=yes
 
 [Install]
 WantedBy=sockets.target

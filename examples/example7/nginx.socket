@@ -4,6 +4,7 @@ Description=nginx sockets
 [Socket]
 ListenStream=80
 ListenStream=443
+NoDelay=yes
 
 [Install]
 WantedBy=sockets.target

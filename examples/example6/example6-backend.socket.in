@@ -6,5 +6,7 @@ ListenStream=/run/user/${envsubst_uid}/backend-socket
 SocketUser=${envsubst_user}
 SocketGroup=${envsubst_user}
 SocketMode=0600
+NoDelay=yes
+
 [Install]
 WantedBy=sockets.target
